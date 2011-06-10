@@ -3,7 +3,7 @@
 %define develname %mklibname -d lcms2
 
 Name: lcms2
-Version: 2.1
+Version: 2.2
 Release: %mkrel 1
 Summary: Color Management Engine
 License: MIT
