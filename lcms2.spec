@@ -3,7 +3,7 @@
 %define develname %mklibname -d lcms2
 
 Name: lcms2
-Version: 2.2
+Version: 2.3
 Release: %mkrel 1
 Summary: Color Management Engine
 License: MIT
@@ -44,11 +44,12 @@ Development files for LittleCMS2.
 %make
 
 %install
-rm -rf ${RPM_BUILD_ROOT}
+rm -rf %{buildroot}
 %makeinstall_std
+rm -f %{buildroot}%{_libdir}/*.la
 
 %clean
-rm -rf ${RPM_BUILD_ROOT}
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
@@ -66,5 +67,5 @@ rm -rf ${RPM_BUILD_ROOT}
 %doc doc/*.pdf
 %{_includedir}/*
 %{_libdir}/*.so
-%{_libdir}/*.la
+#%{_libdir}/*.la
 %{_libdir}/pkgconfig/%{name}.pc
