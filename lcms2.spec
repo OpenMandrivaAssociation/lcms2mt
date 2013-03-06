@@ -1,18 +1,18 @@
-%define major 2
-%define libname %mklibname lcms2_ %major
-%define develname %mklibname -d lcms2
+%define major	2
+%define libname %mklibname %{name}_ %{major}
+%define devname %mklibname -d %{name}
 
 Name:		lcms2
 Version:	2.4
 Release:	2
 Summary:	Color Management Engine
 License:	MIT
-URL:		http://www.littlecms.com/
-Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
 Group:		Graphics
+Url:		http://www.littlecms.com/
+Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
 BuildRequires:	jpeg-devel
 BuildRequires:	tiff-devel
-BuildRequires:	zlib-devel
+BuildRequires:	pkgconfig(zlib)
 
 %description
 LittleCMS intends to be a small-footprint, speed optimized color management
@@ -20,67 +20,47 @@ engine in open source form. LCMS2 is the current version of LCMS, and can be
 parallel installed with the original (deprecated) lcms.
 
 %package -n %{libname}
-Summary:	Libraries for %{name}
+Summary:	Libraries for LittleCMS
 Group:		System/Libraries
-Requires:	%name = %{version}-%{release}
 
 %description -n %{libname}
 This package provides the shared lcms2 library.
 
-%package -n %{develname}
+%package -n %{devname}
 Summary:	Development files for LittleCMS
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n %develname
+%description -n %{%devname}
 Development files for LittleCMS2.
 
 %prep
 %setup -q
 
 %build
-%configure2_5x --disable-static --program-suffix=2
+%configure2_5x \
+	--disable-static \
+	--program-suffix=2
 %make
 
 %install
 %makeinstall_std
-rm -f %{buildroot}%{_libdir}/*.la
+
 install -D -m 644 include/lcms2.h %{buildroot}%{_includedir}/lcms2.h
 install -D -m 644 include/lcms2_plugin.h %{buildroot}%{_includedir}/lcms2_plugin.h
-
 
 %files
 %doc AUTHORS COPYING
 %{_bindir}/*
 %{_mandir}/man1/*
 
-%files -n %libname
-%{_libdir}/*.so.%{major}
-%{_libdir}/*.so.%{major}.*
+%files -n %{%libname}
+%{_libdir}/liblcms2.so.%{major}*
 
-%files -n %develname
+%files -n %{%devname}
 %doc doc/*.pdf
 %{_includedir}/*
 %{_libdir}/*.so
-#%{_libdir}/*.la
 %{_libdir}/pkgconfig/%{name}.pc
-
-
-%changelog
-* Wed Oct  3 2012 Arkady L. Shane <ashejn@rosalab.ru> 2.4-1
-- update to 2.4
-
-* Sat Dec 24 2011 Dmitry Mikhirev <dmikhirev@mandriva.org> 2.3-1mdv2011.0
-+ Revision: 745091
-- new version 2.3
-  remove .la files
-
-* Fri Jun 10 2011 Oden Eriksson <oeriksson@mandriva.com> 2.2-1
-+ Revision: 684161
-- 2.2
-
-* Sat Dec 04 2010 Funda Wang <fwang@mandriva.org> 2.1-1mdv2011.0
-+ Revision: 609271
-- import lcms2
 
