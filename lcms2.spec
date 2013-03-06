@@ -32,7 +32,7 @@ Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n %{%devname}
+%description -n %{devname}
 Development files for LittleCMS2.
 
 %prep
@@ -55,10 +55,10 @@ install -D -m 644 include/lcms2_plugin.h %{buildroot}%{_includedir}/lcms2_plugin
 %{_bindir}/*
 %{_mandir}/man1/*
 
-%files -n %{%libname}
+%files -n %{libname}
 %{_libdir}/liblcms2.so.%{major}*
 
-%files -n %{%devname}
+%files -n %{devname}
 %doc doc/*.pdf
 %{_includedir}/*
 %{_libdir}/*.so
