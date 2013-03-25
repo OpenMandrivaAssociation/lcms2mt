@@ -39,6 +39,7 @@ Development files for LittleCMS2.
 %setup -q
 
 %build
+autoreconf -fi
 %configure2_5x \
 	--disable-static \
 	--program-suffix=2
