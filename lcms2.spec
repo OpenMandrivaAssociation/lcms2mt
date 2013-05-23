@@ -2,10 +2,10 @@
 %define libname %mklibname %{name}_ %{major}
 %define devname %mklibname -d %{name}
 
+Summary:	Color Management Engine
 Name:		lcms2
 Version:	2.4
 Release:	3
-Summary:	Color Management Engine
 License:	MIT
 Group:		Graphics
 Url:		http://www.littlecms.com/
@@ -38,7 +38,7 @@ Development files for LittleCMS2.
 
 %prep
 %setup -q
-%patch -p1 -b .thread
+%apply_patches
 
 %build
 autoreconf -fi
