@@ -4,13 +4,12 @@
 
 Summary:	Color Management Engine
 Name:		lcms2
-Version:	2.4
-Release:	3
+Version:	2.5
+Release:	1
 License:	MIT
 Group:		Graphics
 Url:		http://www.littlecms.com/
 Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
-Patch0:		lcms2-2.4-threading-plugin.patch
 BuildRequires:	jpeg-devel
 BuildRequires:	tiff-devel
 BuildRequires:	pkgconfig(zlib)
