@@ -5,7 +5,7 @@
 Summary:	Color Management Engine
 Name:		lcms2
 Version:	2.5
-Release:	2
+Release:	3
 License:	MIT
 Group:		Graphics
 Url:		http://www.littlecms.com/
