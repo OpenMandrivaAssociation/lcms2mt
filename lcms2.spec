@@ -11,6 +11,7 @@ Group:		Graphics
 Url:		http://www.littlecms.com/
 Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
 BuildRequires:	jpeg-devel
+BuildRequires:	jbig-devel
 BuildRequires:	tiff-devel
 BuildRequires:	pkgconfig(zlib)
 
