@@ -1,11 +1,11 @@
-%define major	2
+%define major 2
 %define libname %mklibname %{name}_ %{major}
 %define devname %mklibname -d %{name}
 
 Summary:	Color Management Engine
 Name:		lcms2
 Version:	2.7
-Release:	2
+Release:	3
 License:	MIT
 Group:		Graphics
 Url:		http://www.littlecms.com/
@@ -41,7 +41,6 @@ Development files for LittleCMS2.
 %apply_patches
 
 %build
-autoreconf -fi
 %configure \
 	--disable-static \
 	--program-suffix=2
@@ -66,4 +65,3 @@ install -D -m 644 include/lcms2_plugin.h %{buildroot}%{_includedir}/lcms2_plugin
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/%{name}.pc
-
