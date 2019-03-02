@@ -12,6 +12,7 @@ Url:		http://git.ghostscript.com/?p=thirdparty-lcms2.git;a=shortlog;h=refs/heads
 # No tarball releases -- packaged from git, 2019/03/02
 Source0:	%{name}-%{version}.tar.xz
 Patch0:		lcms2mt-2.9-compile.patch
+Patch1:		lcms2mt-2.9-link-libm.patch
 BuildRequires:	jbig-devel
 BuildRequires:	tiff-devel
 BuildRequires:	pkgconfig(zlib)
@@ -42,10 +43,13 @@ Development files for LittleCMS2.
 
 %build
 %configure
+sed -i -e 's,define CMSEXPORT,define CMSEXPORT __attribute__((visibility("default"))),g' include/lcms2mt.h
 %make
 
 %install
 %make_install
+# No need to re-export from an external application...
+sed -i -e 's,define CMSEXPORT __attribute__((visibility("default"))),define CMSEXPORT,g' include/lcms2mt.h
 
 install -D -m 644 include/lcms2mt.h %{buildroot}%{_includedir}/lcms2mt.h
 install -D -m 644 include/lcms2mt_plugin.h %{buildroot}%{_includedir}/lcms2mt_plugin.h
