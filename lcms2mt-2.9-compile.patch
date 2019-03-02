@@ -1,0 +1,68 @@
+diff -up lcms2mt-2.9/Makefile.am.omv~ lcms2mt-2.9/Makefile.am
+--- lcms2mt-2.9/Makefile.am.omv~	2019-03-02 15:59:42.702718936 +0100
++++ lcms2mt-2.9/Makefile.am	2019-03-02 16:01:03.076695348 +0100
+@@ -11,13 +11,13 @@ PACKAGE_NAME = @PACKAGE_NAME@
+ PACKAGE_VERSION = @PACKAGE_VERSION@
+ 
+ # Directories containing Makefiles to 'make'
+-SUBDIRS = src include utils/tificc utils/transicc utils/linkicc utils/jpgicc utils/psicc testbed
++SUBDIRS = src include
+ 
+ # Additional files to distribute
+-EXTRA_DIST = AUTHORS COPYING ChangeLog doc Projects include bin Lib INSTALL README.1ST autogen.sh lcms2.pc.in
++EXTRA_DIST = AUTHORS COPYING ChangeLog doc Projects include bin Lib INSTALL README.1ST autogen.sh lcms2mt.pc.in
+ 
+ pkgconfigdir = $(libdir)/pkgconfig
+-pkgconfig_DATA = lcms2.pc
++pkgconfig_DATA = lcms2mt.pc
+ 
+ # Get names of plug-ins in the source package
+ PLUGIN_DIRECTORIES = $(sort $(dir $(wildcard plugins/*/)))
+@@ -48,8 +48,3 @@ install-exec-local:
+ 
+ uninstall-local:
+ 	@for d in $(PLUGIN_DIRECTORIES); do (cd $$d; $(MAKE) $(AM_MAKEFLAGS) uninstall ); done
+-
+-
+-
+-	
+-	
+diff -up lcms2mt-2.9/lcms2mt.pc.in.omv~ lcms2mt-2.9/lcms2mt.pc.in
+--- lcms2mt-2.9/lcms2mt.pc.in.omv~	2019-03-02 16:06:52.295134230 +0100
++++ lcms2mt-2.9/lcms2mt.pc.in	2019-03-02 16:06:56.714164506 +0100
+@@ -6,6 +6,6 @@ includedir=@includedir@
+ Name: @PACKAGE@
+ Description: LCMS Color Management Library
+ Version: @VERSION@
+-Libs: -L${libdir} -llcms2
++Libs: -L${libdir} -llcms2mt
+ Libs.private: @LIB_MATH@ @LIB_THREAD@
+ Cflags: -I${includedir}
+diff -up lcms2mt-2.9/src/Makefile.am.omv~ lcms2mt-2.9/src/Makefile.am
+--- lcms2mt-2.9/src/Makefile.am.omv~	2019-03-02 16:07:05.352224361 +0100
++++ lcms2mt-2.9/src/Makefile.am	2019-03-02 16:07:22.636346782 +0100
+@@ -10,7 +10,7 @@ AUTOMAKE_OPTIONS = 1.7 foreign
+ includedir = ${prefix}/include
+ 
+ # Shared libraries built in this directory
+-lib_LTLIBRARIES = liblcms2.la
++lib_LTLIBRARIES = liblcms2mt.la
+ 
+ LIBRARY_CURRENT    = @LIBRARY_CURRENT@
+ LIBRARY_REVISION   = @LIBRARY_REVISION@
+@@ -18,12 +18,12 @@ LIBRARY_AGE        = @LIBRARY_AGE@
+ 
+ AM_CPPFLAGS = -I$(top_builddir)/include -I$(top_srcdir)/include
+ 
+-liblcms2_la_LDFLAGS = -no-undefined \
++liblcms2mt_la_LDFLAGS = -no-undefined \
+   -version-info $(LIBRARY_CURRENT):$(LIBRARY_REVISION):$(LIBRARY_AGE)
+ 
+-liblcms2_la_LIBADD = $(LCMS_LIB_DEPLIBS)
++liblcms2mt_la_LIBADD = $(LCMS_LIB_DEPLIBS)
+ 
+-liblcms2_la_SOURCES = \
++liblcms2mt_la_SOURCES = \
+   cmscnvrt.c cmserr.c cmsgamma.c cmsgmt.c cmsintrp.c cmsio0.c cmsio1.c cmslut.c \
+   cmsplugin.c cmssm.c cmsmd5.c cmsmtrx.c cmspack.c cmspcs.c cmswtpnt.c cmsxform.c \
+   cmssamp.c cmsnamed.c cmscam02.c cmsvirt.c cmstypes.c cmscgats.c cmsps2.c cmsopt.c \

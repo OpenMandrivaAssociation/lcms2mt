@@ -1,15 +1,17 @@
 %define major 2
-%define libname %mklibname %{name}_ %{major}
+%define libname %mklibname %{name} %{major}
 %define devname %mklibname -d %{name}
 
-Summary:	Color Management Engine
-Name:		lcms2
+Summary:	Color Management Engine, Multi-Threaded fork
+Name:		lcms2mt
 Version:	2.9
-Release:	2
+Release:	1
 License:	MIT
 Group:		Graphics
-Url:		http://www.littlecms.com/
-Source0:	https://sourceforge.net/projects/lcms/files/lcms/2.9/%{name}-%{version}.tar.gz
+Url:		http://git.ghostscript.com/?p=thirdparty-lcms2.git;a=shortlog;h=refs/heads/lcms2mt
+# No tarball releases -- packaged from git, 2019/03/02
+Source0:	%{name}-%{version}.tar.xz
+Patch0:		lcms2mt-2.9-compile.patch
 BuildRequires:	jbig-devel
 BuildRequires:	tiff-devel
 BuildRequires:	pkgconfig(zlib)
@@ -36,28 +38,23 @@ Provides:	%{name}-devel = %{version}-%{release}
 Development files for LittleCMS2.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 %build
-%configure \
-	--disable-static \
-	--program-suffix=2
+%configure
 %make
 
 %install
-%makeinstall_std
+%make_install
 
-install -D -m 644 include/lcms2.h %{buildroot}%{_includedir}/lcms2.h
-install -D -m 644 include/lcms2_plugin.h %{buildroot}%{_includedir}/lcms2_plugin.h
-
-%files
-%doc AUTHORS COPYING
-%{_bindir}/*
-%{_mandir}/man1/*
+install -D -m 644 include/lcms2mt.h %{buildroot}%{_includedir}/lcms2mt.h
+install -D -m 644 include/lcms2mt_plugin.h %{buildroot}%{_includedir}/lcms2mt_plugin.h
+# Previous name of the fork, still used in e.g. mupdf 1.14.0
+ln -s lcms2mt.h %{buildroot}%{_includedir}/lcms2art.h
+ln -s lcms2mt_plugin.h %{buildroot}%{_includedir}/lcms2art_plugin.h
 
 %files -n %{libname}
-%{_libdir}/liblcms2.so.%{major}*
+%{_libdir}/liblcms2mt.so.%{major}*
 
 %files -n %{devname}
 %doc doc/*.pdf
