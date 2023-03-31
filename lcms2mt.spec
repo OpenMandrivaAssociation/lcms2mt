@@ -5,7 +5,7 @@
 Summary:	Color Management Engine, Multi-Threaded fork
 Name:		lcms2mt
 Version:	2.9
-Release:	1
+Release:	2
 License:	MIT
 Group:		Graphics
 Url:		http://git.ghostscript.com/?p=thirdparty-lcms2.git;a=shortlog;h=refs/heads/lcms2mt
