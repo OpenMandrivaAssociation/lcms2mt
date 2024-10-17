@@ -8,7 +8,7 @@ Version:	2.9
 Release:	2
 License:	MIT
 Group:		Graphics
-Url:		http://git.ghostscript.com/?p=thirdparty-lcms2.git;a=shortlog;h=refs/heads/lcms2mt
+Url:		https://git.ghostscript.com/?p=thirdparty-lcms2.git;a=shortlog;h=refs/heads/lcms2mt
 # No tarball releases -- packaged from git, 2019/03/02
 Source0:	%{name}-%{version}.tar.xz
 Patch0:		lcms2mt-2.9-compile.patch
